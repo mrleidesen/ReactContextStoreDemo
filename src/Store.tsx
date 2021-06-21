@@ -2,50 +2,29 @@ import React, { useState, useContext } from 'react'
 
 interface StoreProps {
   isLogin: boolean
+  setIsLogin: (val: boolean) => void
   count: number
-}
-
-interface StoreUpdateProps {
-  setStateIsLogin: Function
-  setStateCount: Function
+  setCount: (val: number) => void
 }
 
 
 const StoreContext = React.createContext<StoreProps>({} as StoreProps)
-const StoreUpdateContext = React.createContext<StoreUpdateProps>({} as StoreUpdateProps)
 
 
 export const useStore = () => useContext(StoreContext)
-export const useStoreUpdate = () => useContext(StoreUpdateContext)
 
 export function Store({ children }: { children: React.ReactNode }) {
-  const [storeValue, setStoreValue] = useState({
-    isLogin: false,
-    count: 2,
-  })
-
-  const setStateCount = (val: number) => {
-    setStoreValue(prev => ({
-      ...prev,
-      count: val
-    }))
-  }
-
-  const setStateIsLogin = (val: boolean) => {
-    setStoreValue(prev => ({
-      ...prev,
-      isLogin: val
-    }))
-  }
+  const [isLogin, setIsLogin] = useState(false)
+  const [count, setCount] = useState(0)
 
   return (
-    <StoreContext.Provider value={storeValue}>
-      <StoreUpdateContext.Provider value={{
-        setStateCount,
-        setStateIsLogin
-      }}>
-        {children}
-      </StoreUpdateContext.Provider>
+    <StoreContext.Provider value={{
+      isLogin,
+      setIsLogin,
+      count,
+      setCount
+    }}>
+      {children}
     </StoreContext.Provider>
   )
 }
