@@ -4,9 +4,11 @@ import { Store, useStore } from './Store'
 export default function App() {
     return (
         <Store>
-            <Login />
-            <Counter />
-            <CounterTwo />
+            <div className="p-2">
+                <Login />
+                <Counter />
+                <CounterTwo />
+            </div>
         </Store>
     )
 }
@@ -17,7 +19,10 @@ function Counter() {
     return (
         <div>
             <h1>{state.count}</h1>
-            <button className="border border-gray-300" onClick={() => state.setCount(state.count + 1)}>Click</button>
+            <button 
+                className="px-2 py-1 bg-blue-500 text-white rounded" 
+                onClick={() => state.setCount(state.count + 1)}
+            >Click</button>
         </div>
     )
 }
@@ -35,7 +40,10 @@ function Login() {
     return (
         <div>
             <p>isLogin: {JSON.stringify(state.isLogin)}</p>
-            <button className="border border-gray-300" onClick={() => state.setIsLogin(!state.isLogin)}>Login</button>
+            <button 
+                className="px-2 py-1 bg-green-500 text-white rounded" 
+                onClick={() => state.setIsLogin(!state.isLogin)}
+            >Login</button>
         </div>
     )
 }
